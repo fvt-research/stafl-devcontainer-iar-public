@@ -1,7 +1,7 @@
 services:
   stafl-devcontainer-iar:
     build:
-      context: stafl-devcontainer-iar
+      context: ./stafl-devcontainer-iar
       dockerfile: Dockerfile
       args:
         - BXARM=fs # change to fs for FuSa edition

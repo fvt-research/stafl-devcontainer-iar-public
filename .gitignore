@@ -1,4 +1,6 @@
 .env
 .DS_Store
 *.deb
+*.tar.gz
+*.key
 
