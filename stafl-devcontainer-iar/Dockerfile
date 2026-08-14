@@ -17,4 +17,12 @@ RUN  export DEBIAN_FRONTEND=noninteractive && \
      apt-get clean autoclean autoremove && \
      rm -rf /tmp/*.deb
 
+RUN wget https://github.com/gabime/spdlog/archive/refs/tags/v1.12.0.tar.gz \
+    && tar zxvf v1.12.0.tar.gz \
+    && cd spdlog-1.12.0 \
+    && mkdir build \
+    && cmake -S . -B build \
+    && cmake --build build --target install -j $(nproc) \
+    && cd .. && rm -rf spdlog-1.12.0 v1.12.0.tar.gz
+
 WORKDIR ${HOME}
