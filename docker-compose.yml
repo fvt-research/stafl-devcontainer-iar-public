@@ -9,6 +9,8 @@ services:
     volumes:
       - ..:/workspaces:cached
       - LMS2:/usr/local/etc/IARSystems
+      - /etc/ssl/certs:/etc/ssl/certs:ro
+    network_mode: host
 
 volumes:
   LMS2:
