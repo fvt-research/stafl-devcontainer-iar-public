@@ -4,32 +4,44 @@
 		"../docker-compose.yml"
 	],
 	"service": "stafl-devcontainer-iar",
-
 	// The optional 'workspaceFolder' property is the path VS Code should open by default when
 	// connected.
-	"workspaceFolder": "/home/vscode",
-	
+	"workspaceFolder": "/home/vscode/projects/stafl_bms_app",
 	"customizations": {
 		"vscode": {
 			"extensions": [
 				"ms-vscode.cpptools",
-				"ms-vscode.cmake-tools"
-			]
+				"ms-vscode.cmake-tools",
+				"KylinIdeTeam.cmake-intellisence",
+				"marus25.cortex-debug",
+				"vivaxy.vscode-conventional-commits",
+				"GitHub.copilot",
+				"eamodio.gitlens",
+				"esbenp.prettier-vscode",
+				"Gruntfuggly.todo-tree"
+			],
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "zsh"
+			}
 		}
 	},
 	"remoteUser": "vscode",
 	"mounts": [
-		"src=/home/<YOUR_WSL_USERNAME>/projects,target=/home/vscode/projects,type=bind", // Replace with your WSL username
-		"source=/mnt/wslg,target=/mnt/wslg,type=bind", // comment out if not on Windows 11
-		"source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind" // comment out if not on Windows 11
+		"src=/home/default/projects,target=/home/vscode/projects,type=bind",
+		"source=/mnt/wslg,target=/mnt/wslg,type=bind",
+		"source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+		"type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/vscode/.ssh,consistency=cached,readonly=false"
 	],
-
+	"postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/projects && sudo chmod -R 775 /home/vscode/projects && ${PACKAGE_DIR}/common/bin/lightlicensemanager setup -s ${LICENSE_SERVER}",
 	"containerEnv": { // comment out if not on Windows 11
 		"DISPLAY": ":0",
 		"PULSE_SERVER": "/mnt/wslg/PulseServer",
 		"WAYLAND_DISPLAY": "wayland-0",
-		"XDG_RUNTIME_DIR": "/mnt/wslg/runtime-dir"
+		"XDG_RUNTIME_DIR": "/mnt/wslg/runtime-dir",
+		"STAFL_JFROG_API_KEY": "<STAFL_JFROG_API_KEY>",
+		"LICENSE_SERVER": "10.178.68.137",
+		"PACKAGE_DIR": "/opt/iarsystems/bxarmfs",
+		"JLINK_IP_0":"<JLINK_IP_0>"
 	},
-
-	"shutdownAction": "stopCompose"
+	"shutdownAction": "stopCompose",
 }

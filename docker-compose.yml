@@ -4,7 +4,7 @@ services:
       context: ./stafl-devcontainer-iar
       dockerfile: Dockerfile
       args:
-        - BXARM=non-fs # change to fs for FuSa edition
+        - BXARM=fs # change to fs for FuSa edition
     command: sleep infinity
     volumes:
       - ..:/workspaces:cached
